@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <title>Testside</title>
+    <style>
+        #container {
+            position: absolute;
+            width: 200px;
+            height: 300px;
+            left: 500px;
+            top:10px;
+        }
+        #kule {
+            position: absolute;
+            left: 590px;
+            top: 295px;
+        }
+        #beregn {
+            position: absolute;
+            left: 400px;
+            top:300px;
+        }
+        #fahrenheit {
+            position: absolute;
+            left: 300px;
+            top:200px;
+        }
+        #txtFahrenheit {
+            position: absolute;
+            left:300px;
+            top: 150px;
+        }
+        #txtCelsius {
+            position: absolute;
+            left:300px;
+            top: 220px;
+        }
+        #svar {
+            position: absolute;
+            left:300px;
+            top: 240px;
+        }
+    </style>
+    <script>
+        window.onload = oppstart;
+        function oppstart() {
+            tegngraf();
+            document.getElementById("beregn").onclick=tegngraf;
+            function tegngraf () {
+                var fahrenheit=Number(document.getElementById("fahrenheit").value);
+                var tempCelisus=[parseInt((fahrenheit-32)*5/9)];
+                var ctx=document.getElementById("kule").getContext("2d");
+                document.getElementById("svar").innerHTML=tempCelisus;
+                ctx.beginPath();
+                ctx.arc(10, 10, 10, 0, 2 * Math.PI);
+                ctx.fillStyle = '#ff0000';
+                ctx.fill();
+                Highcharts.chart('container', {
+
+                    chart: {
+                        type: 'column',
+                        marginLeft: 95,//marg som gjør kolonnen smal
+                        marginRight: 95, //marg som gjør kolonnen smal
+                        plotBackgroundColor: '#DDDDDD'  //grå bakgrunnsfarge
+                    },
+                    title: {
+                        text: 'Celsius',  //Tittel på diagrammet
+                        align: 'left'  //plasseres til venstre
+                    },
+
+                    credits: {
+                        enabled: false //Fjerner teksten Highcharts.com
+                    },
+                    xAxis: {
+                        visible: false  //X-aksen skla ikek vises
+                    },
+                    yAxis: {
+                        min: -20,  //min verdi for y-aksen
+                        max: 30, //max verdi for y-aksen
+                        tickInterval: 10, //avstand mellom hovedstrek
+                        tickWidth: 1,  //Tykkelse på hovedstrek
+                        tickLength: 10,  //Lengden til hovedstrek
+                        gridLineWidth: 0,  //fjerner hovestrek i bakgrunnen
+                        minorTickWidth: 1, //Tykkeles på delstrek
+                        minorTickLength: 5, //Lengden på delstrek
+                        minorTickInterval: 2, //Avstand mellom delstrek
+                        minorGridLineWidth: 0,  //Fjerner delstrek i bakgrunne
+                        offset: 30,  //Avstand mellom aksen og grafflaten
+                        title: {
+                            text: null  //Ingen tittel på y-aksen
+                        }
+                    },
+                    series: [{
+                        name:'temperatur',
+                        data: tempCelisus,  //Her er verien som en array
+                        threshold: -20,  //Gjør at kolonnen starter under null
+                        showInLegend: false,  //Vi skal ikke vise *temperatur
+                        color: 'red',  //Angir farge
+                        dataLabels: {
+                          enabled: true  //Verdien vises over søylen
+                        }
+                    }]
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="container"></div>
+<canvas id="kule" height="20" width="20"></canvas>
+<button id="beregn">Gjør om</button>
+<p id="txtFahrenheit">Fahrenheit</p>
+<p id="txtCelsius">Celsius</p>
+<p id="svar"></p>
+<input id="fahrenheit" type="text" value="32">
+</body>
+</html>
