@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Testside</title>
+    <style>
+        /*css styling her
+    </style>
+    <script>
+        window.onload = oppstart;
+
+        function oppstart() {
+            var beregn=document.getElementById("beregn");
+            beregn.onclick=beregnlan;
+            function beregnlan() {
+                var belop=Number(document.getElementById("pengebelop").value);
+                var antallAr=Number(document.getElementById("antallaar").value);
+                var renteSats=Number(document.getElementById("rentesats").value);
+                var resultat=document.getElementById("resultat");
+                for (var i = 1; i < antallAr+1; i++) {
+                    resultat.innerHTML += "Etter " + i + " år har du " + (belop * Math.pow((1 + renteSats / 100), i)).toFixed(2) + " kroner i banken"+"\n";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<p>Pengebeløp: <input type="text" id="pengebelop"></p>
+<p>Antall år: <input type="text" id="antallaar"></p>
+<p>Rentesats: <input type="text" id="rentesats"></p>
+<button id="beregn">Regn ut</button>
+<textarea id="resultat" rows="10" cols="50"></textarea>
+</body>
+</html>
